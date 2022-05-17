@@ -124,8 +124,30 @@ console.log(chris);
 
 // Variables por valor o referencia?
 // Variables por valor en JS son las primitivas: number, string, boolean
-edadChris = 24;
-edadChris = edadAlex; // Guardamos una primitiva en otra variable
-                      // Variables por valor
-console.log(edadAdrian); // 24
-console.log(edadAdrian); // 22
+let edadChris = 24;
+let edadAlex = edadChris; // Guardamos una primitiva en otra variable
+                          // Variables por valor
+console.log(edadChris); // 24
+console.log(edadAlex); // 24
+edadAlex += 1;
+console.log(edadChris); // 24
+console.log(edadAlex); // 25
+
+// Variables por referencia: object ({},[])
+let notas={
+    total: 10
+};
+let notasSegundoBimestre = notas;
+notasSegundoBimestre.total += 1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+notas.total += 1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+//Como clonar objetos
+let notasTercerBimestre = Object.assign({},notas);
+// Object.assign({},arreglo);
+notasTercerBimestre.total = notasTercerBimestre.total +1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+console.log(notasTercerBimestre);
