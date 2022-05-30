@@ -1,0 +1,144 @@
+[object Object]// 02-arreglos.js
+let arreglo = [6, 7, 8, 9, 10];
+arreglo = 1;
+arreglo = true;
+arreglo = undefined;
+arreglo = null;
+arreglo = {};
+arreglo = [true, 1, 1.1, "Christian", "Alejandro", undefined, null, {}, [1,2]];
+arreglo = [6, 7, 8, 9, 10];
+
+// for of
+for (let numero of arreglo) {
+    console.log('numero', numero);
+}
+
+// for in
+for (let indice in arreglo) {
+    arreglo[indice]
+    console.log('indice', indice);
+}
+
+let objetoPrueba = {a:'1', b:'2', c:'3'};
+for (let llave in objetoPrueba) {
+    console.log('llave', llave);
+}
+
+arreglo.push(11); // Añadir al final un elemento
+// [6, 7, 8, 9, 10, 11];
+arreglo.pop(); // Eliminar al final un elemento
+// [6, 7, 8, 9, 10];
+arreglo.unshift(5); //Añadir al principio del arreglo
+// [5, 6, 7, 8, 9, 10];
+console.log(arreglo);
+// splice(indicem numero de elementos eliminados, ...items a agregar)
+arreglo.splice(0,0,4);
+// [4, 5, 6, 7, 8, 9, 10];
+console.log(arreglo);
+const indiceNueve = arreglo.indexOf(9); // Encuentra el primer elemento y devuelve el indice
+arreglo.splice(indiceNueve,2);
+// [4, 5, 6, 7, 8];
+console.log(arreglo);rdadero");
+}else{
+    console.log("String vacío es falsy");
+}
+
+if("Chris"){
+    console.log("String con datos es truty");
+}else{
+    console.log("String con datos es falsy");
+}
+
+if(-1){
+    console.log("Negativo es truty");
+}else{
+    console.log("Negativo es falsy");
+}
+
+if(0){
+    console.log("Cero es truty");
+}else{
+    console.log("Cero es falsy");
+}
+
+if(1){
+    console.log("Positivo es truty");
+}else{
+    console.log("Positivo es falsy");
+}
+
+// Orden de importancia
+// 1) const
+// 2) let
+// 3) X -> "var"
+// Objetos Js (JSON)
+const chris = {
+    "nombre": "Christian",// llave: valor,
+    apellido: "Morán",
+    edad: 24,
+    hijos: null,
+    zapatos: undefined,
+    casado: false,
+    ropa:{
+        color: 'plomo',
+        talla: 'S',
+    },
+    mascotas:["Lua", "Nat"],
+};
+
+console.log(chris);
+
+// Acceder a las propiedades del objeto
+chris.nombre;
+chris.apellido;
+chris["nombre"];
+// Cambiar valores
+chris.nombre="Alejandro";
+console.log(chris);
+chris["nombre"]="Christian";
+// Crear nuevos atributos o métodos dentro del objeto
+chris.sueldo; //undefined
+console.log(chris.sueldo);
+chris.sueldo= 1.2;
+console.log(chris.sueldo);
+chris["gastos"]= 0.8;
+console.log(chris.gastos);
+console.log(chris.sueldo);
+// Borrar el valor de una propiedad
+chris.nombre = undefined;
+console.log(chris);
+console.log(Object.keys(chris));
+console.log(Object.values(chris));
+// Delete la llave y el valor dentro del objeto
+delete chris.nombre; // Eliminar la llave "nombre"
+console.log(chris);
+
+// Variables por valor o referencia?
+// Variables por valor en JS son las primitivas: number, string, boolean
+let edadChris = 24;
+let edadAlex = edadChris; // Guardamos una primitiva en otra variable
+                          // Variables por valor
+console.log(edadChris); // 24
+console.log(edadAlex); // 24
+edadAlex += 1;
+console.log(edadChris); // 24
+console.log(edadAlex); // 25
+
+// Variables por referencia: object ({},[])
+let notas={
+    total: 10
+};
+let notasSegundoBimestre = notas;
+notasSegundoBimestre.total += 1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+notas.total += 1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+//Como clonar objetos
+let notasTercerBimestre = Object.assign({},notas);
+// Object.assign({},arreglo);
+notasTercerBimestre.total = notasTercerBimestre.total +1;
+console.log(notas);
+console.log(notasSegundoBimestre);
+console.log(notasTercerBimestre);
