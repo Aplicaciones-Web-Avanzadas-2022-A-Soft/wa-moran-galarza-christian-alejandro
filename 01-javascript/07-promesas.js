@@ -17,10 +17,25 @@ function promesaEsPar(numero){
     return miPrimerPromesa;
 }
 
-promesaEsPar(3)
+function promesaElevarAlCuadrado(numero){
+    const miPrimerPromesa = new Promise(
+        (resolve,reject) =>{
+            const numeroElevadoAlCuadrado = Math.pow(numero,2);
+            resolve(numeroElevadoAlCuadrado);
+        }
+    );
+    return miPrimerPromesa;
+}
+
+promesaEsPar(4)
     .then(
-        (respuesta)=>{
-            console.log('Respuesta: ', respuesta);
+        (numeroPar)=>{
+            return promesaElevarAlCuadrado(numeroPar) // OTRA PROMESA
+        }
+    )
+    .then(
+        (numeroParElevadoAlCuadrado)=>{
+            console.log('numeroParElevadoAlCuadrado', numeroParElevadoAlCuadrado);
         }
     )
     .catch(

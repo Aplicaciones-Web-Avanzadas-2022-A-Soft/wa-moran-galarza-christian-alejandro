@@ -17,7 +17,7 @@ function leerArchivo(path){
                 (error, contenido) => {
                     if(error){
                         console.error(error);
-                        throw new Error('Error leyendo archivo');
+                        reject('Error leyendo archivo');
                     }else{
                         resolve(contenido);
                     }
@@ -49,10 +49,11 @@ function escribirArchivo(path, contenidoFinal){
             fs.writeFile(
                 path,
                 contenidoFinal,
+                {flag:'a+'},
                 (errorEscritura)=>{
                     if(errorEscritura){
                         console.log(errorEscritura);
-                        throw new Error('Error escribiendo archivo');
+                        reject('Error escribiendo archivo');
                     }else{
                         resolve();
                     }
@@ -65,24 +66,21 @@ function escribirArchivo(path, contenidoFinal){
 
 leerArchivo(path1).then(
     (respuesta1)=>{
-        escribirArchivo('./01-nuevo-archivo.txt',respuesta1).finally(
+        escribirArchivo('./01-nuevo-archivo.txt',respuesta1)
+            .finally(
             ()=>{
-
                 console.info('Primer archivo escrito');
             }
-        );
+        )
     }
 );
 
 leerArchivo(path2).then(
-    (respuesta)=>{
-        escribirArchivo('./01-nuevo-archivo.txt',respuesta).finally(
+    (respuesta2)=>{
+        escribirArchivo('./01-nuevo-archivo.txt',respuesta2).finally(
             ()=>{
                 console.info('Segundo archivo escrito');
             }
         );
     }
 );
-
-
-
