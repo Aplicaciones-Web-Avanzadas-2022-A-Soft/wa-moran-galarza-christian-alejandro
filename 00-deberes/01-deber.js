@@ -16,7 +16,6 @@ function leerArchivo(path){
                 'utf-8',
                 (error, contenido) => {
                     if(error){
-                        console.error(error);
                         reject('Error leyendo archivo');
                     }else{
                         resolve(contenido);
