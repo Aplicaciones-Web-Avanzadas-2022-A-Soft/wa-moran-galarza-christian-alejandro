@@ -1,4 +1,9 @@
+import styles from './login-home.module.css'
+
 interface LoginProperties{
+    color: string;
+    backgroundColor: string;
+    borderBottom: string;
     propiedadesImagen:{
         width: number,
         height: number,
@@ -15,14 +20,16 @@ type LoginPropertiesType = {
 }
 
 const LoginHome = (props: LoginProperties) => {
-    // const propiedadesImagen = {
-    //     width: 200,
-    //     height: 100,
-    //     urlImagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGcNLA-TryQn54W4tVNLr8E2n_ADvRF5oW4pbmTnMxF3S-YnB8zAV9GMNl5O8HoaS43d4&usqp=CAU'
-    // };
-    return (
+    const misEstilos = {
+        color: props.color,
+        backgroundColor: props.backgroundColor,
+        borderBottom: '5px solid brown',
+        };
+        return (
         <>
-            <h1>Login home</h1>
+            <h1 style={misEstilos}>Login home</h1>
+            <h2 className={styles.azul}>AZUL</h2>
+            <h2 className={styles.rojo}>ROJO</h2>
             <img src={props.propiedadesImagen.urlImagen}
                  width={props.propiedadesImagen.width}
                  height={props.propiedadesImagen.height}/>
