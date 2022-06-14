@@ -13,6 +13,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossOrigin="anonymous"></link>
     </Head>
     <header>
       <nav>
@@ -26,6 +29,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
         |{' '}
         <Link href="/mi-perfil">
             <a>Mi Perfil</a>
+        </Link>{' '}
+        |{' '}
+        <Link href="/cripto">
+            <a>Cripto Transformador</a>
         </Link>{' '}
         |{' '}
         <Link href="/users">
