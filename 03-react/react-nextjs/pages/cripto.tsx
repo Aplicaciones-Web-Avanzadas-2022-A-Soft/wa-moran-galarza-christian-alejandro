@@ -13,7 +13,8 @@ const Cripto = () => (
         src={'https://www.prensalibre.com/wp-content/uploads/2021/10/criptomonedas-1.jpg?quality=52'}
         alt={'Texto Alternativo Criptomoneda'}>
     </ImagenPrincipal>
-    <h1>Hola desde Cripto</h1>
+    <h1>Seleccion</h1>
+    <p>Selecciona tu moneda y criptomoneda</p>
     <CryptoFormulario></CryptoFormulario>
   </Layout>
 )
