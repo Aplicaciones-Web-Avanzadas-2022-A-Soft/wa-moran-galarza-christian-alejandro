@@ -14,10 +14,10 @@ export default function IdEstudiante(){
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = [
         {
-            params: { idEstudiante: 1 }
+            params: { idEstudiante: '1' },
         },
         {
-            params: { idEstudiante: 2 }
+            params: { idEstudiante: '2' },
         }
     ];
     return { paths, fallback: false }
