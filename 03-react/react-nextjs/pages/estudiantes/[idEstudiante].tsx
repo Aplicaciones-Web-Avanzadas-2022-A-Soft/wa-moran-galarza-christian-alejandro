@@ -1,11 +1,13 @@
 import Layout from "../../components/Layout";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {sampleUserData} from "../../utils/sample-data";
+import {TodosHttp} from "../../functions/http/todos.http";
+import {EstudianteInterface} from "./index";
 
-export default function IdEstudiante(){
+export default function IdEstudiante( props: {estudiante: EstudianteInterface}){
     return(
         <Layout title={'Id estudiante'}>
-            Hola id estudiante
+            Hola { props.estudiante.title}
         </Layout>
     )
 }
@@ -26,9 +28,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // Código para cargar información en el servidor y enviar al cliente.
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     try {
+        // fetch
         const id = params?.idEstudiante
-        const estudiante = {id: id, nombre: 'Chris'}
-        return { props: { estudiante } }
+        const resultado = await TodosHttp(id as string)
+        return { props: { estudiante: resultado } }
     } catch (err: any) {
         return { props: { errors: err.message } }
     }
