@@ -1,0 +1,1 @@
+[{"id":"1","nombre":"C","apellido":"D","direccion":"F","fechaNacimiento":"G","disquera":"H","sueldo":20,"tipo":"Manager"},{"id":"2","nombre":"c","apellido":"d","direccion":"3","fechaNacimiento":"2","disquera":"1","sueldo":123,"tipo":"Manager"}]

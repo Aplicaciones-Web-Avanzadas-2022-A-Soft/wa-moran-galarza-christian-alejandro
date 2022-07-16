@@ -31,7 +31,7 @@ arreglo.pop(); // Eliminar al final un elemento
 arreglo.unshift(5); //Añadir al principio del arreglo
 // [5, 6, 7, 8, 9, 10];
 console.log(arreglo);
-// splice(indicem numero de elementos eliminados, ...items a agregar)
+// splice(indice, numero de elementos eliminados, ...items a agregar)
 arreglo.splice(0,0,4);
 // [4, 5, 6, 7, 8, 9, 10];
 console.log(arreglo);
