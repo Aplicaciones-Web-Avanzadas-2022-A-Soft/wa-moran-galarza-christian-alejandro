@@ -1,9 +1,9 @@
 // 01-deber.js
 const fs = require('fs');
-//const path1= 'C:/Users/IntelHPi5/Documents/Software/Octavo Semestre/Aplicaciones Web Avanzadas/wa-moran-galarza-christian-alejandro/01-javascript/06-ejemplo.txt';
-const path1='C:\\Users\\SIGMA\\Documents\\wa-moran-galarza-christian-alejandro\\01-javascript\\06-ejemplo.txt';
-//const path2= 'C:/Users/IntelHPi5/Documents/Software/Octavo Semestre/Aplicaciones Web Avanzadas/wa-moran-galarza-christian-alejandro/01-javascript/01-variables.js';
-const path2='C:\\Users\\SIGMA\\Documents\\wa-moran-galarza-christian-alejandro\\01-javascript\\01-variables.js';
+const path1= 'C:\\Users\\crisa\\WebstormProjects\\wa-moran-galarza-christian-alejandro\\01-javascript\\06-ejemplo.txt';
+//const path1='C:\\Users\\SIGMA\\Documents\\wa-moran-galarza-christian-alejandro\\01-javascript\\06-ejemplo.txt';
+const path2= 'C:\\Users\\crisa\\WebstormProjects\\wa-moran-galarza-christian-alejandro\\01-javascript\\01-variables.js';
+//const path2='C:\\Users\\SIGMA\\Documents\\wa-moran-galarza-christian-alejandro\\01-javascript\\01-variables.js';
 
 function leerArchivo(path){
     const promesaLeer = new Promise(
