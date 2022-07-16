@@ -1,8 +1,9 @@
 // 02-deber.js
 const fs = require('fs');
 const inquirer = require("inquirer");
-const path = './02-datos.txt';
-// let arregloDatos = []
+const path1 = './02-datos-managers.txt';
+const path2 = './02-datos-artistas.txt';
+let arregloDatos = []
 
 function leerArchivo(path){
     return new Promise(
@@ -46,18 +47,18 @@ function escribirArchivo(path, contenido){
     )
 }
 
-async function guardarDatos(){
+async function guardarDatos(path){
     try{
-        await escribirArchivo("./02-datos.txt", JSON.stringify(arregloDatos));
+        await escribirArchivo(path, JSON.stringify(arregloDatos));
     }catch (e) {
         console.log('Error en la escritura de los datos', e);
     }
 }
 
-async function extraerDatos(){
+async function extraerDatos(path){
     let contenido = undefined;
     try{
-        contenido = await escribirArchivo("./02-datos.txt");
+        contenido = await escribirArchivo(path);
         if(contenido !== undefined){
             arregloDatos = JSON.parse(contenido);
         }else{
@@ -81,7 +82,7 @@ let manager = {
 
 async function crearManager(){
     try{
-        inquirer.prompt([
+        const respuestas = inquirer.prompt([
             {
                 type: 'input',
                 name: 'nombre',
@@ -111,9 +112,17 @@ async function crearManager(){
                 type: 'number',
                 name: 'sueldo',
                 message: 'Ingresa el sueldo del manager:'
-            }
-
-        ]);
+            },
+        ])
+        const indice = arregloDatos.findIndex(
+            elemento => elemento.nombre === respuestas.nombre
+        )
+        if(indice !== -1){
+            console.log('Indice incorrecto.')
+        }else{
+            respuestas.artistas = [];
+            arregloDatos.push(respuestas);
+        }
     }catch (e) {
         console.log('Error al crear un Manager', e);
     }
