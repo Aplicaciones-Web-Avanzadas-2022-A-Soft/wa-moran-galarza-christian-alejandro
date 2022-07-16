@@ -1,3 +1,5 @@
+Hola
+
 // 01-javascript/
 // Mutables e Inmutables
 
@@ -150,4 +152,4 @@ let notasTercerBimestre = Object.assign({},notas);
 notasTercerBimestre.total = notasTercerBimestre.total +1;
 console.log(notas);
 console.log(notasSegundoBimestre);
-console.log(notasTercerBimestre);Hola
+console.log(notasTercerBimestre);

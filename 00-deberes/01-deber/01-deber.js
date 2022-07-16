@@ -5,20 +5,31 @@ const path1= 'C:\\Users\\crisa\\WebstormProjects\\wa-moran-galarza-christian-ale
 const path2= 'C:\\Users\\crisa\\WebstormProjects\\wa-moran-galarza-christian-alejandro\\01-javascript\\01-variables.js';
 //const path2='C:\\Users\\SIGMA\\Documents\\wa-moran-galarza-christian-alejandro\\01-javascript\\01-variables.js';
 
-function leerArchivo(path){
+function leerArchivo(path1, path2){
     const promesaLeer = new Promise(
         (
             resolve,
             reject
         ) => {
             fs.readFile(
-                path,
+                path1,
                 'utf-8',
-                (error, contenido) => {
-                    if(error){
-                        reject('Error leyendo archivo');
+                (errorPrimerArchivo, contenidoPrimerArchivo) => {
+                    if(errorPrimerArchivo){
+                        reject('Error leyendo primer archivo');
                     }else{
-                        resolve(contenido);
+                        fs.readFile(
+                            path2,
+                            'utf-8',
+                            (errorSegundoArchivo, contenidoSegundoArchivo) => {
+                                if(errorSegundoArchivo){
+                                    reject('Error leyendo segundo archivo');
+                                }else{
+                                    const contenido = contenidoPrimerArchivo + '\n\n' + contenidoSegundoArchivo;
+                                    resolve(contenido);
+                                }
+                            }
+                        );
                     }
                 }
             );
@@ -48,7 +59,7 @@ function escribirArchivo(path, contenidoFinal){
             fs.writeFile(
                 path,
                 contenidoFinal,
-                {flag:'a+'},
+                // {flag:'a+'},
                 (errorEscritura)=>{
                     if(errorEscritura){
                         console.log(errorEscritura);
@@ -63,23 +74,23 @@ function escribirArchivo(path, contenidoFinal){
     return promesaEscribir;
 }
 
-leerArchivo(path1).then(
-    (respuesta1)=>{
-        escribirArchivo('./01-nuevo-archivo.txt',respuesta1)
+leerArchivo(path1, path2).then(
+    (respuesta)=>{
+        escribirArchivo('./01-nuevo-archivo.txt',respuesta)
             .finally(
             ()=>{
-                console.info('Primer archivo escrito');
+                console.info('Archivo escrito con éxito');
             }
         )
     }
 );
 
-leerArchivo(path2).then(
-    (respuesta2)=>{
-        escribirArchivo('./01-nuevo-archivo.txt',respuesta2).finally(
-            ()=>{
-                console.info('Segundo archivo escrito');
-            }
-        );
-    }
-);
+// leerArchivo(path2).then(
+//     (respuesta2)=>{
+//         escribirArchivo('./01-nuevo-archivo.txt',respuesta2).finally(
+//             ()=>{
+//                 console.info('Segundo archivo escrito');
+//             }
+//         );
+//     }
+// );
