@@ -96,6 +96,7 @@ async function recibirId(nombreEntidad){
 
 async function crearManager(){
     try{
+        await leerManager();
         const respuestas = await inquirer.prompt([
             {
                 type: 'input',
@@ -159,13 +160,30 @@ const leerManager = () => {
         );
     if(arregloManagers.length !== 0){
         console.log('\n\n\t\tListado de Managers');
-        console.log(arregloManagers);
+        const arregloFinal = arregloManagers
+            .map(
+                (valorActual, indiceActual, arregloCompleto) => {
+                    return {
+                        id: valorActual.id,
+                        nombre: valorActual.nombre,
+                        apellido: valorActual.apellido,
+                        direccion: valorActual.direccion,
+                        fechaNacimiento: valorActual.fechaNacimiento,
+                        disquera: valorActual.disquera,
+                        sueldo: valorActual.sueldo,
+                        artistas: JSON.stringify(valorActual.artistas),
+                        tipo: valorActual.tipo,
+                    };
+                }
+            );
+        console.log(arregloFinal);
     }else{
         console.log('\n\nNo existen managers.\n');
     }
 }
 
 async function actualizarManager(){
+    await leerManager();
     let idManager = await recibirId(' manager ');
     const indice = arregloDatos.findIndex(
         elemento => elemento.id === idManager
@@ -221,6 +239,7 @@ async function actualizarManager(){
 }
 
 async function borrarManager(){
+    await leerManager();
     let idManager = await recibirId(' manager ');
     const indice = arregloDatos.findIndex(
         elemento => elemento.id === idManager
@@ -261,6 +280,7 @@ async function borrarManager(){
 
 async function crearArtista(){
     try{
+        await leerManager();
         const respuestas = await inquirer.prompt([
             {
                 type: 'input',
@@ -288,7 +308,7 @@ async function crearArtista(){
                 message: 'Ingresa la fecha de nacimiento del artista:'
             },
             {
-                type: 'input',
+                type: 'confirm',
                 name: 'disponibilidad',
                 message: 'Ingresa la disponibilidad del artista:'
             },
@@ -297,6 +317,11 @@ async function crearArtista(){
                 name: 'numeroDiscos',
                 message: 'Ingresa el numero de discos del artista:'
             },
+            {
+                type: 'number',
+                name: 'idManager',
+                message: 'Ingresa el id del Manager:'
+            },
         ])
         const indice = arregloDatos.findIndex(
             elemento => elemento.id === respuestas.id
@@ -304,8 +329,13 @@ async function crearArtista(){
         if(indice !== -1){
             console.log('\n\nYa existe un artista con ese identificador.\n')
         }else{
-            respuestas.discos = [];
             respuestas.tipo = 'Artista';
+            let objeto = {idArtista: respuestas.id,nombre: respuestas.nombre, apellido: respuestas.apellido}
+            if(arregloDatos[respuestas.idManager-1].artistas === undefined){
+                arregloDatos[respuestas.idManager-1].artistas.push(objeto);
+            }else{
+                arregloDatos[respuestas.idManager-1].artistas.push(objeto);
+            }
             arregloDatos.push(respuestas);
             console.log('\n\nArtista creado con éxito.\n')
             await leerArtista();
@@ -331,6 +361,7 @@ const leerArtista = () => {
 }
 
 async function actualizarArtista(){
+    await leerArtista();
     let idArtista = await recibirId(' artista ');
     const indice = arregloDatos.findIndex(
         elemento => elemento.id === idArtista
@@ -359,7 +390,7 @@ async function actualizarArtista(){
                     message: 'Ingresa la fecha de nacimiento del artista:'
                 },
                 {
-                    type: 'input',
+                    type: 'confirm',
                     name: 'disponibilidad',
                     message: 'Ingresa la disponibilidad del artista:'
                 },
@@ -386,9 +417,10 @@ async function actualizarArtista(){
 }
 
 async function borrarArtista(){
-    let idManager = await recibirId(' artista ');
+    await leerArtista();
+    let idArtista = await recibirId(' artista ');
     const indice = arregloDatos.findIndex(
-        elemento => elemento.id === idManager
+        elemento => elemento.id === idArtista
     )
     if(indice !== -1){
         try{
@@ -400,7 +432,12 @@ async function borrarArtista(){
                 }
             )
             if(respuesta.confirmacion){
+                let idManager = arregloDatos[indice].idManager;
                 arregloDatos.splice(indice, 1);
+                const indiceArreglo = arregloDatos[idManager-1].artistas.findIndex(
+                    elemento => elemento.id === idArtista
+                );
+                arregloDatos[idManager-1].artistas.splice(indiceArreglo, 1);
                 console.log('\n\nArtista eliminado con éxito.\n');
                 await leerArtista();
             }else{
@@ -420,6 +457,7 @@ async function menu(){
     while(opcion !== 0){
         console.log(
             '\t\tMenu Principal\n'
+            +'\n0. Salir.'
             +'\n1. Crear manager.'
             +'\n2. Listar managers.'
             +'\n3. Actualizar manager.'
