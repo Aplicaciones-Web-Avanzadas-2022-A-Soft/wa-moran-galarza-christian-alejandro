@@ -16,10 +16,9 @@ export default function Managers(){
     return(
         <Layout title={'CRUD Manager'}>
             <h1>CRUD Manager</h1>
-            <button type="submit"
-                    className="btn btn-primary">
-                CREAR
-            </button>
+            <form action='manager/nueva'>
+                <input type="submit" className="btn btn-primary" value="CREAR" />
+            </form>
             <table>
                 {arregloManagers.map(
                     (manager) => {
