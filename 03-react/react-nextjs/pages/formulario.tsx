@@ -3,10 +3,13 @@ import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {toast} from "react-hot-toast";
+import {List,ListInput} from "konsta/react";
+import AccesibilityIcon from "@mui/icons-material/Accessibility";
 
 type FormularioEjemplo = {
     nombre: string;
     estadoCivil: string;
+    tvShow: string;
 }
 
 export default function Formulario(){
@@ -16,7 +19,8 @@ export default function Formulario(){
         {
             defaultValues:{
                 nombre: 'Chris',
-                estadoCivil: ''
+                estadoCivil: '',
+                tvShow: '',
             },
             mode: 'onTouched'
         }
@@ -71,6 +75,34 @@ export default function Formulario(){
                                 Errores: {errors.nombre.message}
                             </div>
                         }
+                    </div>
+                    <div className="mb-3">
+                        <List >
+                            <FormControl fullWidth>
+                                <Controller
+                                    control={control}
+                                    rules={{ required: {value: true, message: 'TV Show requerido'}}}
+                                    name="tvShow"
+                                    render={({field: {onChange, value, onBlur,}}) => {
+                                        return <ListInput
+                                            label="TV Show"
+                                            type="text"
+                                            placeholder="Your favorite TV show"
+                                            info="Type something to see clear button"
+                                            media = {<AccesibilityIcon/>}
+                                            onBlur={onBlur}
+                                            value={value}
+                                            onChange={onChange}
+                                        />
+                                    }}
+                                />
+                                {errors.tvShow &&
+                                    <div className="alert alert-warning" role="alert">
+                                        Tiene errores {errors.tvShow.message}
+                                    </div>
+                                }
+                            </FormControl>
+                        </List>
                     </div>
                     <div className="mb-3">
                         <FormControl fullWidth>
