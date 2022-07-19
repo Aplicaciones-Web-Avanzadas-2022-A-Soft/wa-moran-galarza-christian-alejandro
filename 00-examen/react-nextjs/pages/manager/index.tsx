@@ -16,7 +16,7 @@ export default function Managers(){
     return(
         <Layout title={'CRUD Manager'}>
             <h1>CRUD Manager</h1>
-            <form action='manager/nueva'>
+            <form action='/manager/nueva'>
                 <input type="submit" className="btn btn-primary" value="CREAR" />
             </form>
             <table>

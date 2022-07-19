@@ -56,9 +56,6 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
             <a>Formulario</a>
         </Link>{' '}
         |{' '}
-        <Link href="/manager">
-            <a>Manager</a>
-        </Link>{' '}
       </nav>
     </header>
     <div className="container">
