@@ -56,6 +56,9 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
             <a>Formulario</a>
         </Link>{' '}
         |{' '}
+        <Link href="/websocket">
+            <a>Websocket</a>
+        </Link>{' '}
       </nav>
     </header>
     <div className="container">
