@@ -1,11 +1,20 @@
 import Layout from "../../components/Layout";
 
-export default function Nueva(){
-    return (
+export interface Artista{
+    id?: number;
+    nombre?: string;
+}
+
+interface props{
+    artistas: Artista[];
+}
+
+export default function Artista(){
+    return(
         <>
-            <Layout title="Formulario Crear Manager">
+            <Layout title="Formulario Crear Artista">
                 <form className="seccion1">
-                    <h1 className="titulo">Formulario Crear Manager</h1>
+                    <h1 className="titulo">Formulario Crear Artista</h1>
                     <div className="mb-3 campo">
                         <label htmlFor="id" className="form-label">ID</label>
                         <input type="text"
@@ -39,17 +48,17 @@ export default function Nueva(){
                             Ingresa el apellido.
                         </div>
                     </div>
-                    {/*<div className="mb-3 campo">*/}
-                    {/*    <label htmlFor="direccion" className="form-label">Dirección</label>*/}
-                    {/*    <input type="text"*/}
-                    {/*           className="form-control"*/}
-                    {/*           placeholder="EJ: Conocoto"*/}
-                    {/*           id="direccion"*/}
-                    {/*           aria-describedby="nombreHelp"/>*/}
-                    {/*    <div id="nombreHelp" className="form-text">*/}
-                    {/*        Ingresa la dirección.*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="mb-3 campo">
+                        <label htmlFor="direccion" className="form-label">Dirección</label>
+                        <input type="text"
+                               className="form-control"
+                               placeholder="EJ: Conocoto"
+                               id="direccion"
+                               aria-describedby="nombreHelp"/>
+                        <div id="nombreHelp" className="form-text">
+                            Ingresa la dirección.
+                        </div>
+                    </div>
                     <div className="mb-3 campo">
                         <label htmlFor="fechaNacimiento" className="form-label">Fecha de Nacimiento</label>
                         <input type="text"
@@ -62,25 +71,14 @@ export default function Nueva(){
                         </div>
                     </div>
                     <div className="mb-3 campo">
-                        <label htmlFor="disquera" className="form-label">Disquera</label>
+                        <label htmlFor="fechaDebut" className="form-label">Fecha Debut</label>
                         <input type="text"
                                className="form-control"
-                               placeholder="EJ: Sony Music"
-                               id="disquera"
+                               placeholder="EJ: 19/04/2021"
+                               id="fechaDebut"
                                aria-describedby="nombreHelp"/>
                         <div id="nombreHelp" className="form-text">
-                            Ingresa la disquera.
-                        </div>
-                    </div>
-                    <div className="mb-3 campo">
-                        <label htmlFor="sueldo" className="form-label">Sueldo</label>
-                        <input type="text"
-                               className="form-control"
-                               placeholder="EJ: 4000"
-                               id="sueldo"
-                               aria-describedby="nombreHelp"/>
-                        <div id="nombreHelp" className="form-text">
-                            Ingresa el sueldo.
+                            Ingresa la fecha de debut.
                         </div>
                     </div>
                     <div className="mb-3">

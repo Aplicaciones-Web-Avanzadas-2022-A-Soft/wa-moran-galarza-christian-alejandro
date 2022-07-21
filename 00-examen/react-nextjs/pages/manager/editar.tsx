@@ -1,22 +1,11 @@
 import Layout from "../../components/Layout";
 
-export default function Nueva(){
+export default function Editar(){
     return (
         <>
-            <Layout title="Formulario Crear Manager">
+            <Layout title="Formulario Editar Manager">
                 <form className="seccion1">
-                    <h1 className="titulo">Formulario Crear Manager</h1>
-                    <div className="mb-3 campo">
-                        <label htmlFor="id" className="form-label">ID</label>
-                        <input type="text"
-                               className="form-control"
-                               placeholder="EJ: 1"
-                               id="id"
-                               aria-describedby="nombreHelp"/>
-                        <div id="nombreHelp" className="form-text">
-                            Ingresa el ID.
-                        </div>
-                    </div>
+                    <h1 className="titulo">Formulario Editar Manager</h1>
                     <div className="mb-3 campo">
                         <label htmlFor="nombre" className="form-label">Nombre</label>
                         <input type="text"
@@ -39,17 +28,17 @@ export default function Nueva(){
                             Ingresa el apellido.
                         </div>
                     </div>
-                    {/*<div className="mb-3 campo">*/}
-                    {/*    <label htmlFor="direccion" className="form-label">Dirección</label>*/}
-                    {/*    <input type="text"*/}
-                    {/*           className="form-control"*/}
-                    {/*           placeholder="EJ: Conocoto"*/}
-                    {/*           id="direccion"*/}
-                    {/*           aria-describedby="nombreHelp"/>*/}
-                    {/*    <div id="nombreHelp" className="form-text">*/}
-                    {/*        Ingresa la dirección.*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="mb-3 campo">
+                        <label htmlFor="direccion" className="form-label">Dirección</label>
+                        <input type="text"
+                               className="form-control"
+                               placeholder="EJ: Conocoto"
+                               id="direccion"
+                               aria-describedby="nombreHelp"/>
+                        <div id="nombreHelp" className="form-text">
+                            Ingresa la dirección.
+                        </div>
+                    </div>
                     <div className="mb-3 campo">
                         <label htmlFor="fechaNacimiento" className="form-label">Fecha de Nacimiento</label>
                         <input type="text"
@@ -92,7 +81,7 @@ export default function Nueva(){
                         <a href="/manager">
                             <input type="button"
                                    className="btn btn-primary botonDerecha"
-                                   value="CREAR"/>
+                                   value="EDITAR"/>
                         </a>
                     </div>
                 </form>
