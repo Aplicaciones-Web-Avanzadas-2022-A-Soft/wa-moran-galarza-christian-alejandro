@@ -1,6 +1,6 @@
 import {ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway} from "@nestjs/websockets";
-
 import {Server, Socket} from 'socket.io';
+
 @WebSocketGateway(
     8080,
     {
@@ -28,15 +28,15 @@ export class EventosGateway {
     @SubscribeMessage('unirseSala')
     unirseSala(
         @MessageBody()
-            message: {salaId: string, nombre: string},
+            message: { salaId: string, nombre: string },
         @ConnectedSocket()
             socket: Socket
-    ){
+    ) {
         socket.join(message.salaId);
-        const mensajeDeBienvenidaSala = {mensaje: 'Bienvenido '+ message.nombre};
+        const mensajeDeBienvenidaSala = {mensaje: 'Bienvenido ' + message.nombre};
         socket.broadcast.to(message.salaId)
-            .emit('escucharEventeUnirseSala', mensajeDeBienvenidaSala);
-        return {mensaje: 'ok'}
+            .emit('escucharEventoUnirseSala', mensajeDeBienvenidaSala);
+        return {mensaje: 'ok'};
     }
     @SubscribeMessage('enviarMensaje')
     enviarMensaje(
@@ -46,12 +46,12 @@ export class EventosGateway {
             socket: Socket
     ){
         const mensajeSala = {
-            nombre: +message.nombre,
-            mensaje: +message.mensaje,
-            salaId: +message.salaId
+            nombre: message.nombre,
+            mensaje: message.mensaje,
+            salaId: message.salaId
         };
         socket.broadcast.to(message.salaId)
-            .emit('escucharEventeMensajeSala', mensajeSala);
+            .emit('escucharEventoMensajeSala', mensajeSala);
         return {mensaje: 'ok'}
     }
 }

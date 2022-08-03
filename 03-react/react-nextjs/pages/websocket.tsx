@@ -6,8 +6,6 @@ import MensajeChat, {MensajeChatProps} from "../components/MensajeChat";
 const servidorWebSocket = 'http://localhost:8080';
 const socket = io(servidorWebSocket);
 
-
-
 export default function WebSocket(){
     const [isConnected, setIsConnected] = useState(socket.connected)
     const [mensajes, setMensajes] = useState([] as MensajeChatProps[])
@@ -29,15 +27,30 @@ export default function WebSocket(){
                 setIsConnected(false);
                 console.log("No está conectado");
             });
-            socket.on('escucharEventoHola',
-                (data: {mensaje:string}) => {
+            socket.on('escucharEventoHola', (data: {mensaje: string}) => {
                 const nuevoMensaje: MensajeChatProps = {
                     mensaje: data.mensaje,
                     nombre: 'Sistema',
                     posicion: 'I'
                 };
-                setMensajes((mensajeAnteriores)=>
-                    [...mensajeAnteriores, nuevoMensaje]);
+                setMensajes((mensajeAnteriores)=> [...mensajeAnteriores, nuevoMensaje]);
+            });
+            socket.on('escucharEventoUnirseSala', (data: {mensaje: string}) => {
+                    const nuevoMensaje: MensajeChatProps = {
+                        mensaje: data.mensaje,
+                        nombre: 'Sistema',
+                        posicion: 'I'
+                    };
+                    console.log('mensaje', data.mensaje);
+                    setMensajes((mensajeAnteriores)=> [...mensajeAnteriores, nuevoMensaje]);
+            });
+            socket.on('escucharEventoMensajeSala', (data: {mensaje:string, nombre: string, salaId:string}) => {
+                    const nuevoMensaje: MensajeChatProps = {
+                        mensaje: data.salaId + ' - ' +data.mensaje,
+                        nombre: data.nombre,
+                        posicion: 'I'
+                    };
+                    setMensajes((mensajeAnteriores)=> [...mensajeAnteriores, nuevoMensaje]);
             });
         },
         []
@@ -59,10 +72,9 @@ export default function WebSocket(){
     }
 
     const unirseSala = (data) => {
-        console.log(data);
         if(data.mensaje === ''){
             const dataEventoUnirseSala = {
-                salaID: data.salaId,
+                salaId: data.salaId,
                 nombre: data.nombre,
             };
             socket.emit(
@@ -70,9 +82,27 @@ export default function WebSocket(){
                 dataEventoUnirseSala,
                 () => {
                     const nuevoMensaje: MensajeChatProps = {
-                        mensaje: 'Bienvenido a la sala ' + dataEventoUnirseSala.salaID,
+                        mensaje: 'Bienvenido a la sala ' + dataEventoUnirseSala.salaId,
                         nombre: 'Sistema',
                         posicion: 'I'
+                    };
+                    setMensajes((mensajesAnteriores) => [...mensajesAnteriores, nuevoMensaje]);
+                }
+            )
+        }else{
+            const dataEventoEnviarMensajeSala = {
+                salaId: data.salaId,
+                nombre: data.nombre,
+                mensaje: data.mensaje
+            };
+            socket.emit(
+                'enviarMensaje',
+                dataEventoEnviarMensajeSala,
+                () => {
+                    const nuevoMensaje: MensajeChatProps = {
+                        mensaje: data.salaId + ' - ' + data.mensaje,
+                        nombre: data.nombre,
+                        posicion: 'D'
                     };
                     setMensajes((mensajesAnteriores) => [...mensajesAnteriores, nuevoMensaje]);
                 }
@@ -80,9 +110,6 @@ export default function WebSocket(){
         }
     }
 
-    const enviarMensajeALaSala = (data) => {
-        console.log(data);
-    }
     return(
         <>
             <Layout title="WebSocket">
@@ -149,7 +176,7 @@ export default function WebSocket(){
                                 <div id="mensajeeHelp" className="form-text">
                                     Ingresa tu mensaje.
                                 </div>
-                                {errors.nombre &&
+                                {errors.mensaje &&
                                     <div className="alert alert-warning" role="alert">
                                         Errores: {errors.mensaje.message}
                                     </div>
