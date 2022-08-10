@@ -11,21 +11,21 @@ export class NotaEntity {
         type: 'integer',
         nullable: false,
     })
-    notaPrimerBimestre: string;
+    notaPrimerBimestre: number;
 
     @Column({
         name: 'user_nota_segundo_bimestre',
         type: 'integer',
         nullable: false,
     })
-    notaSegundoBimestre: string;
+    notaSegundoBimestre: number;
 
     @Column({
         name: 'user_nota_examen_final',
         type: 'integer',
         nullable: false,
     })
-    notaExamenFinal: string;
+    notaExamenFinal: number;
 
     @Column({
         name: 'user_comentario',
