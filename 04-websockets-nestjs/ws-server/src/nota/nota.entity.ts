@@ -38,5 +38,5 @@ export class NotaEntity {
     @ManyToOne(
         () => UsuarioEntity,
         (user) => user.notas)
-    usuario: UsuarioEntity;
+    usuario: UsuarioEntity | number;
 }

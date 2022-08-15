@@ -16,4 +16,8 @@ export class NotaUpdateDto{
     @IsOptional()
     @IsString()
     comentario: string;
+
+    @IsOptional()
+    @IsNumber()
+    usuario: number;
 }
