@@ -20,7 +20,7 @@ import {NotaEntity} from "./nota/nota.entity";
             UsuarioEntity, NotaEntity
         ], // entidades del aplicativo completo
         synchronize: true,
-        dropSchema: true,
+        dropSchema: false,
       }),
       UsuarioModule,
       NotaModule
